@@ -1,0 +1,36 @@
+[2024-04-30T20:51:29.571+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-04-30T20:51:29.588+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_reddit_pipeline.google_api_extraction manual__2024-04-30T20:51:26.381504+00:00 [queued]>
+[2024-04-30T20:51:29.592+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_reddit_pipeline.google_api_extraction manual__2024-04-30T20:51:26.381504+00:00 [queued]>
+[2024-04-30T20:51:29.592+0000] {taskinstance.py:2303} INFO - Starting attempt 1 of 1
+[2024-04-30T20:51:29.602+0000] {taskinstance.py:2327} INFO - Executing <Task(PythonOperator): google_api_extraction> on 2024-04-30 20:51:26.381504+00:00
+[2024-04-30T20:51:29.619+0000] {standard_task_runner.py:63} INFO - Started process 52 to run task
+[2024-04-30T20:51:29.636+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'etl_reddit_pipeline', 'google_api_extraction', 'manual__2024-04-30T20:51:26.381504+00:00', '--job-id', '18', '--raw', '--subdir', 'DAGS_FOLDER/redditDag.py', '--cfg-path', '/tmp/tmpc93abvgo']
+[2024-04-30T20:51:29.660+0000] {standard_task_runner.py:91} INFO - Job 18: Subtask google_api_extraction
+[2024-04-30T20:51:29.760+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_reddit_pipeline.google_api_extraction manual__2024-04-30T20:51:26.381504+00:00 [running]> on host ea6091eedd70
+[2024-04-30T20:51:29.884+0000] {taskinstance.py:2644} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Vaibhav Sharma' AIRFLOW_CTX_DAG_ID='etl_reddit_pipeline' AIRFLOW_CTX_TASK_ID='google_api_extraction' AIRFLOW_CTX_EXECUTION_DATE='2024-04-30T20:51:26.381504+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-04-30T20:51:26.381504+00:00'
+[2024-04-30T20:51:29.885+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-04-30T20:51:30.157+0000] {logging_mixin.py:188} INFO - Error making Google Custom Search API request: 400 Client Error: Bad Request for url: https://www.googleapis.com/customsearch/v1?key=LHoBQfYPzQA14HH_BOvEfB6Maz1c3Q&cx=7028cb91469b0412d&q=data+engineering&siteSearch=dataengineering
+[2024-04-30T20:51:30.159+0000] {logging_mixin.py:188} INFO - <class 'list'>
+[2024-04-30T20:51:30.159+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-04-30T20:51:30.160+0000] {taskinstance.py:2890} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/pipelines/googleSearchPipeline.py", line 11, in custom_search_pipeline
+    processed_data = process_subreddit_search(search_data)
+  File "/opt/airflow/etls/customSearchEtl.py", line 41, in process_subreddit_search
+    'search_terms': data['searchTerms'],
+TypeError: list indices must be integers or slices, not str
+[2024-04-30T20:51:30.180+0000] {taskinstance.py:1205} INFO - Marking task as FAILED. dag_id=etl_reddit_pipeline, task_id=google_api_extraction, execution_date=20240430T205126, start_date=20240430T205129, end_date=20240430T205130
+[2024-04-30T20:51:30.188+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 18 for task google_api_extraction (list indices must be integers or slices, not str; 52)
+[2024-04-30T20:51:30.203+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-04-30T20:51:30.212+0000] {taskinstance.py:3482} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-04-30T20:51:30.213+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
