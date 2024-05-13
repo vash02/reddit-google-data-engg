@@ -100,7 +100,7 @@ def load_data_to_parquet(data: pd.DataFrame, path: str):
         spark.stop()
 
 
-data = search_reddit_subreddit("data engineering","reddit.com/r/dataengineering","AIzaSyABGdVM83A28q2Xecz2e6sKuBDjINnpgSg","7028cb91469b0412d")
+# data = search_reddit_subreddit("data engineering","reddit.com/r/dataengineering","...","...")
 
-processed_data = process_subreddit_search(data)
-load_data_to_json(pd.DataFrame(processed_data),"data/output/reddit_search_20240429.json")
+# processed_data = process_subreddit_search(data)
+# load_data_to_json(pd.DataFrame(processed_data),"data/output/reddit_search_20240429.json")
